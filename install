@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+PWD=`dirname "$0"`
+BIN=/usr/local/bin
+CONF=/etc/ssh/sshd_config.d/99-grabakey.conf
+UserID="$1"
+
+sudo mkdir -p $BIN
+sudo cp $PWD/grabakey $BIN
+sudo chown root $BIN/grabakey
+sudo chmod 0700 $BIN/grabakey
+sudo echo "AuthorizedKeysCommand $BIN/grabakey" | sudo tee $CONF
+sudo echo "AuthorizedKeysCommandUser nobody" | sudo tee -a $CONF
+sudo sshd -t && sudo service sshd restart
+
+sudo echo "$UserID" > $HOME/.ssh/grabakey_id

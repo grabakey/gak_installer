@@ -1,0 +1,8 @@
+#!/bin/sh -x
+
+PWD=`dirname "$0"`
+BIN=/usr/local/bin
+CONF=/etc/ssh/sshd_config.d/99-grabakey.conf
+
+sudo rm $BIN/grabakey
+sudo rm $CONF
