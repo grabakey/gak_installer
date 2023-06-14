@@ -1,16 +1,17 @@
 #!/bin/bash -xe
 
+# root required because nobody cannot read users home directories
+
 PWD=`dirname "$0"`
 BIN=/usr/local/bin
 CONF=/etc/ssh/sshd_config.d
 FILE=$CONF/99-grabakey.conf
 ID="$1"
 
-# root required because nobody cannot read users home directories
 sudo mkdir -p $BIN
 sudo cp $PWD/grabakey $BIN
 sudo chown root $BIN/grabakey
-sudo chmod 0700 $BIN/grabakey
+sudo chmod 0755 $BIN/grabakey
 sudo echo "AuthorizedKeysCommand $BIN/grabakey" | sudo tee $FILE
 sudo echo "AuthorizedKeysCommandUser root" | sudo tee -a $FILE
 sudo sshd -t && sudo service sshd restart

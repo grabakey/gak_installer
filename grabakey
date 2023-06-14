@@ -1,21 +1,29 @@
 #!/bin/bash
 
+# curl verified -vv to check https certs by default
+# macos certs are at /etc/ssl/cert.pem
+
 User="$1"
-File=/home/$User/.ssh/grabakey_id
+OSNAME="$(uname -s)"
+
+case "$OSNAME" in
+    Linux*)     DOTSSH=/home/$User/.ssh;;
+    Darwin*)    DOTSSH=/Users/$User/.ssh;;
+esac
+
+File=$DOTSSH/grabakey_id
 
 if [ -f "$File" ]; then
     ID=`cat $File`
-    curl https://grabakey.org/api/pubkey/$ID
-    echo
+    curl -w "\n" https://grabakey.org/api/pubkey/$ID
 fi
 
-Dir=/home/$User/.ssh/grabakey_id.d
+Dir=$DOTSSH/grabakey_id.d
 
 if [ -d "$Dir" ]; then
     for File in "$Dir/*"
     do
         ID=`cat $File`
-        curl https://grabakey.org/api/pubkey/$ID
-        echo
+        curl -w "\n" https://grabakey.org/api/pubkey/$ID
     done
 fi

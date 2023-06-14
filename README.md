@@ -10,7 +10,7 @@ curl https://grabakey.org/api/pubkey -d <EMAIL>
 
 - openssh with `/etc/ssh/sshd_config.d` support
 - openssh with ed25519 support
-- bash, sudo, curl, git, echo, mkdir, cat, tee
+- bash, sudo, curl, git, echo, mkdir, cat, tee, uname
 
 ## Compatibility
 
