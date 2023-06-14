@@ -1,9 +1,21 @@
 #!/bin/bash
 
 User="$1"
-Path=/home/$User/.ssh/grabakey_id
+File=/home/$User/.ssh/grabakey_id
 
-if [ -f "$Path" ]; then
-    UserID=`cat $Path`
-    curl https://grabakey.org/api/users/$UserID
+if [ -f "$File" ]; then
+    ID=`cat $File`
+    curl https://grabakey.org/api/pubkey/$ID
+    echo
+fi
+
+Dir=/home/$User/.ssh/grabakey_id.d
+
+if [ -d "$Dir" ]; then
+    for File in "$Dir/*"
+    do
+        ID=`cat $File`
+        curl https://grabakey.org/api/pubkey/$ID
+        echo
+    done
 fi
