@@ -6,7 +6,7 @@ Let grabakey serve your sshd public keys.
 
 - Create a public key with:
 ```bash
-curl https://grabakey.org/api/pubkey -d <EMAIL>
+curl https://grabakey.org/api/user -d <EMAIL>
 ```
 - Follow instructions on received confirmation email.
 

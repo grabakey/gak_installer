@@ -15,7 +15,7 @@ File=$DOTSSH/grabakey_id
 
 if [ -f "$File" ]; then
     ID=`cat $File`
-    curl -w "\n" https://grabakey.org/api/pubkey/$ID
+    curl -w "\n" https://grabakey.org/api/user/$ID
 fi
 
 Dir=$DOTSSH/grabakey_id.d
@@ -24,6 +24,6 @@ if [ -d "$Dir" ]; then
     for File in "$Dir/*"
     do
         ID=`cat $File`
-        curl -w "\n" https://grabakey.org/api/pubkey/$ID
+        curl -w "\n" https://grabakey.org/api/user/$ID
     done
 fi
